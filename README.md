@@ -12,3 +12,12 @@ How does spark shuffle actually works ? - does it write to disk (2 stage process
  - 
  
 > Apache Ignite for sharing state across spark applications
+
+
+## Spark with Tungsten
+* Improves memory and CPU efficiency of Spark Applications (optimizes Memory+CPU)
+* Pushes performances closer to the limits of the modern hardware
+
+* spark.sql.tungsten.enabled flag is true by default in Spark 1.5
+* try disabling and see how it performs
+* 
