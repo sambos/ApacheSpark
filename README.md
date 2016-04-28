@@ -19,5 +19,4 @@ How does spark shuffle actually works ? - does it write to disk (2 stage process
 * Pushes performances closer to the limits of the modern hardware
 
 * spark.sql.tungsten.enabled flag is true by default in Spark 1.5
-* try disabling and see how it performs
-* 
+* This flag (spark.sql.tungsten.enabled) is default enabled and is removed since [Spark 1.6](https://spark.apache.org/releases/spark-release-1-6-0.html)
