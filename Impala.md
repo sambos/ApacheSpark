@@ -27,15 +27,14 @@ public class HiveImpalaJdbcDriver {
     //private static final String CONNECTION_URL = "jdbc:hive2://<server>:10000/default;principal=hive/<server>@domain";
 	 private static final String CONNECTION_URL = "jdbc:hive2://<server>:21050/default;principal=impala/<server>@domain";    
     public static void main(String[] args) {
-    		System.out.println("from HiveImpalaJdbcDriver");
-    		
-        String realm = "UNITOPR.UNITINT.TEST.STATEFARM.ORG";
-    		System.setProperty("java.security.krb5.realm", realm);
+       
+        System.out.println("from HiveImpalaJdbcDriver");
+    	System.setProperty("java.security.krb5.realm", "<your-domain>");
     		   
         System.setProperty("java.security.krb5.kdc", realm + ":88");   //KDC-Port 88        
         String keytabpath = "./src/main/resources/majeed.keytab";
         keytabpath = new File(keytabpath).getAbsolutePath();
-    		System.out.println("keytab path ::" + keytabpath);
+    	System.out.println("keytab path ::" + keytabpath);
     		
         org.apache.hadoop.conf.Configuration conf = new org.apache.hadoop.conf.Configuration();
         conf.set("hadoop.security.authentication", "Kerberos");
