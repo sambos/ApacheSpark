@@ -10,7 +10,44 @@ impala-shell -k -i <impala-daemon-server-name>
 https://blog.cloudera.com/blog/2016/02/new-sql-benchmarks-apache-impala-incubating-2-3-uniquely-delivers-analytic-database-performance/
 
 #### Connecting to Impala/Hive from your workstation
+###### Create Keytab file
+```shell
 
+```
+###### Test connection from Impala Shell
+```shell
+## put data to hdfs
+hdfs dfs -copyFromLocal city.txt /user/name/input
+
+## change permissions
+hdfs dfs -chmod 777 /user/name/input/city.txt
+
+$ impala-shell -k -i <impala-daemon-host>
+[impala-daemon-host:21000] > show schemas;
+Query: show schemas
++----------+
+| name     |
++----------+
+| default  |
++----------+
+
+
+CREATE EXTERNAL TABLE IF NOT EXISTS sampledb.citytable
+(
+    st STRING COMMENT 'State', 
+    ct STRING COMMENT 'City', 
+    po STRING COMMENT 'Population'
+) 
+COMMENT 'Original Table' 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
+LOCATION '/user/name/input/city.txt';
+
+-- you can aswell load using
+load data inpath '/user/name/input/city.txt' into table sampledb.citytable
+
+```
+
+###### Example connection from workstation
 ```java
 import java.io.File;
 import java.io.IOException;
