@@ -12,6 +12,10 @@ https://blog.cloudera.com/blog/2016/02/new-sql-benchmarks-apache-impala-incubati
 #### Connecting to Impala/Hive from your workstation
 ###### Create Keytab file
 ```shell
+$ktutil
+$ktutil: addent -password -p username -k 1 -e rc4-hmac
+$ktutil:wkt /home/name/majeed.keytab
+$ktutil: quit
 
 ```
 ###### Test connection from Impala Shell
@@ -106,4 +110,11 @@ public class HiveImpalaJdbcDriver {
 }
 
 
+```
+
+###### Steps to execute
+```sh
+javac  -classpath /opt/cloudera/parcels/CDH-5.5.2-1.cdh5.5.2.p0.4/jars/hadoop-common-2.6.0-cdh5.5.2.jar HiveImpalaJdbcDriver.java
+export CLASSPATH=${CLASSPATH}:/opt/cloudera/parcels/CDH-5.5.2-1.cdh5.5.2.p0.4/lib/hive/lib/*:/opt/cloudera/parcels/CDH-5.5.2-1.cdh5.5.2.p0.4/jars/*
+java HiveImpalaJdbcDriver 
 ```
