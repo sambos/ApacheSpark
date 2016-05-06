@@ -50,6 +50,33 @@ LOCATION '/user/name/input/city.txt';
 load data inpath '/user/name/input/city.txt' into table sampledb.citytable
 
 ```
+###### dependecies
+Following dependences are required
+
+```xml
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hive</groupId>
+			<artifactId>hive-jdbc</artifactId>
+			<version>0.14.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>jetty-all</artifactId>
+					<groupId>org.eclipse.jetty.aggregate</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>2.7.2</version>
+		</dependency>
+```
+
 
 ###### Example connection from workstation
 ```java
@@ -118,3 +145,4 @@ javac  -classpath /opt/cloudera/parcels/CDH-5.5.2-1.cdh5.5.2.p0.4/jars/hadoop-co
 export CLASSPATH=${CLASSPATH}:/opt/cloudera/parcels/CDH-5.5.2-1.cdh5.5.2.p0.4/lib/hive/lib/*:/opt/cloudera/parcels/CDH-5.5.2-1.cdh5.5.2.p0.4/jars/*
 java HiveImpalaJdbcDriver 
 ```
+
