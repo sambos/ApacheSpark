@@ -10,6 +10,11 @@ impala-shell -k -i <impala-daemon-server-name>
 https://blog.cloudera.com/blog/2016/02/new-sql-benchmarks-apache-impala-incubating-2-3-uniquely-delivers-analytic-database-performance/
 
 #### Connecting to Impala/Hive from your workstation
+
+###### using LDAP/Kerberos Authentication
+Here is the good article explaining the concepts - 
+[Impala Authentication with LDAP Kerberos](http://blog.cloudera.com/blog/2014/10/new-in-cdh-5-2-impala-authentication-with-ldap-and-kerberos/)
+
 ###### Create Keytab file
 ```shell
 $ktutil
