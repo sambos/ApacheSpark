@@ -18,7 +18,7 @@ Here is the good article explaining the concepts -
 ###### Create Keytab file
 ```shell
 $ktutil
-$ktutil: addent -password -p username -k 1 -e rc4-hmac
+$ktutil: addent -password -p username@REALM -k 1 -e rc4-hmac
 $ktutil:wkt /home/name/majeed.keytab
 $ktutil: quit
 
