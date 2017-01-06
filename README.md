@@ -1,6 +1,5 @@
 # ApacheSpark
-
-## SparkSQL vs HiveSQL
+Apache Spark is designed for interactive batch processing and somewhat near realtime streaming (micro batch) processing. It will still be in the market and is well fit for batch processing. For real time streaming i would recommend to look at Apache Flink project.
 
 ## Sharing state across Spark Jobs
 Global variabl in spark
