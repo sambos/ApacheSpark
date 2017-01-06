@@ -11,10 +11,7 @@ How does spark shuffle actually works ? - does it write to disk (2 stage process
  
 > Apache Ignite for sharing state across spark applications
 
+## Spark Performance Tuning
+Beware, Spark has a lot more performance tuning parameters and requires a good knowledge of GC/Memory handling apart from understanding its core architecture. I will share with you few articles and tips on how to performance tune few areas, obviously this is not the place to provide all the performance tuning information..
 
-## Spark with Tungsten
-* Improves memory and CPU efficiency of Spark Applications (optimizes Memory+CPU)
-* Pushes performances closer to the limits of the modern hardware
-
-* spark.sql.tungsten.enabled flag is true by default in Spark 1.5
-* This flag (spark.sql.tungsten.enabled) is default enabled and is removed since [Spark 1.6](https://spark.apache.org/releases/spark-release-1-6-0.html)
+[Spark Performance Tuning from Spark Summit 2013](https://www.youtube.com/watch?v=NXp3oJHNM7E)
