@@ -15,3 +15,12 @@ How does spark shuffle actually works ? - does it write to disk (2 stage process
 Beware, Spark has a lot more performance tuning parameters and requires a good knowledge of GC/Memory handling apart from understanding its core architecture. I will share with you few articles and tips on how to performance tune few areas, obviously this is not the place to provide all the performance tuning information..
 
 [Spark Performance Tuning from Spark Summit 2013](https://www.youtube.com/watch?v=NXp3oJHNM7E)
+
+
+## Things to Keep in Mind
+Having too many small files on HDFS is not good for performance. First of all. Each time you read file, NameNode queries for block locations, then connect to the DataNode with stored file. The Overhead of this connections and responses is really huge.
+
+* Understanding the  default Spark settings will help in diagnosing the problem, so make sure you understand the default settings. 
+* By default Spark starts on YARN with 2 executors (--num-executors) with 1 thread each (--executor-cores) and 512m of RAM (--executor-cores), giving you only 2 threads with 512MB RAM each, which is really small for the real-world tasks.
+* You can change this settings with --num-executors 4 --executor-memory 12g --executor-cores 4 which would give you more parallelism - 16 threads in this particular case, which means 16 tasks running in parallel. You can also check default parallelism from sc SparkConfig.
+* For fast reading and writing use SequenceFile (that uses binary compressed format)
