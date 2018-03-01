@@ -32,3 +32,4 @@ sqlContext.setConf("spark.default.parallelism", "300")
 or using 
 ./bin/spark-submit --conf spark.sql.shuffle.partitions=400 --conf spark.default.parallelism=300
 ```
+* Spark automatically sets the number of partitions of an input file according to its size and for distributed shuffles. By default spark create one partition for each block of the file in HDFS it is 64MB by default.
