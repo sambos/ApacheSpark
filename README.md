@@ -15,7 +15,8 @@ How does spark shuffle actually works ? - does it write to disk (2 stage process
 Beware, Spark has a lot more performance tuning parameters and requires a good knowledge of GC/Memory handling apart from understanding its core architecture. I will share with you few articles and tips on how to performance tune few areas, obviously this is not the place to provide all the performance tuning information..
 
 * Recommended resources :
-* * http://people.csail.mit.edu/matei/papers/2012/nsdi_spark.pdf
+  * http://people.csail.mit.edu/matei/papers/2012/nsdi_spark.pdf
+  * http://site.clairvoyantsoft.com/understanding-resource-allocation-configurations-spark-application/
 
 
 ## Things to Keep in Mind
@@ -62,3 +63,8 @@ or using
 
 ** yarn.nodemanager.resource.memory-mb => Amount of physical memory allocated to containers
 ** yarn.scheduler.maximum-allocation-mb => max memory RM can allocate to a container
+
+### Tasks
+* Per spark documentation, the recommended # of tasks in a cluster is 2 to 3 times CPU cores. You can specify the parallelism with `spark.default.parallelism` as part of spark-submit job.
+
+
