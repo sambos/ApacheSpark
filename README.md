@@ -14,6 +14,9 @@ How does spark shuffle actually works ? - does it write to disk (2 stage process
 ## Spark Performance Tuning
 Beware, Spark has a lot more performance tuning parameters and requires a good knowledge of GC/Memory handling apart from understanding its core architecture. I will share with you few articles and tips on how to performance tune few areas, obviously this is not the place to provide all the performance tuning information..
 
+* Recommended resources :
+* * http://people.csail.mit.edu/matei/papers/2012/nsdi_spark.pdf
+
 
 ## Things to Keep in Mind
 Having too many small files on HDFS is not good for performance. First of all. Each time you read file, NameNode queries for block locations, then connect to the DataNode with stored file. The Overhead of this connections and responses is really huge.
@@ -33,3 +36,11 @@ or using
 ./bin/spark-submit --conf spark.sql.shuffle.partitions=400 --conf spark.default.parallelism=300
 ```
 * Spark automatically sets the number of partitions of an input file according to its size and for distributed shuffles. By default spark create one partition for each block of the file in HDFS it is 64MB by default.
+* * Command to find block size : `hdfs getconf -confKey dfs.blocksize`
+
+* Consider repartitioning carefully, depending on your data organization, it may or may not cause shuffle. The shuffle can happen at the begining of stage (is called Shuffle Read) and that can happen at the end of stage (is called Shuffle Write).
+
+* The actual allocated memory by YARN for an executor = --executor-memory + spark.yarn.executor.memoryOverhead. The memoryOverhead is calculated as 7% of executor memory that you want to allocate. If you request 10GB, yarn will allocate total 10+0.7 = ~11GB
+* * The calculation for that overhead is MAX(384, .07 * spark.executor.memory). If 7% of requsted is greater than 384MB, the greater overhead is used.
+* * Without proper memory allocation, you will see errors like `Container killed by YARN for exceeding memory limits. 9.0 GB of 9 GB physical memory used`
+
