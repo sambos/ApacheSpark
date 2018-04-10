@@ -73,4 +73,4 @@ This could be a killer if data is not properly partitioned. If you see that 1% o
 * By inroducing replication technique, see example: https://datarus.wordpress.com/2015/05/04/fighting-the-skew-in-spark
 
 ### Reducing Partitions using Coalese
-Use Coalese instead of repartition when simply reducing the # of partitions, this will avoid full shuffle. This is useful when you just want to write to disk with less number of partitions.
+Use Coalese with Shuffle as false instead of repartition when simply reducing the # of partitions, this will avoid full shuffle (minimize data movement). This is useful when you just want to write to disk with less number of partitions. Repartition internally calls coalese with shuffle as false.
