@@ -67,4 +67,7 @@ or using
 ### Tasks
 * Per spark documentation, the recommended # of tasks in a cluster is 2 to 3 times CPU cores. You can specify the parallelism with `spark.default.parallelism` as part of spark-submit job.
 
-
+### Data Skew
+This could be a killer if data is not properly partitioned. If you see that 1% of the task is taking 99% of the time, then there is a probable indication that you have data skew problem. This is mostly caused when a large rdd is joined with a smaller rdd. Possible resolutions:
+* Repartition the data based on the partitions required, recommended after joins or unions and after reading compressed data.
+* By inroducing replication technique, see example: https://datarus.wordpress.com/2015/05/04/fighting-the-skew-in-spark
