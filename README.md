@@ -36,18 +36,18 @@ or using
 ./bin/spark-submit --conf spark.sql.shuffle.partitions=400 --conf spark.default.parallelism=300
 ```
 * Spark automatically sets the number of partitions of an input file according to its size and for distributed shuffles. By default spark create one partition for each block of the file in HDFS it is 64MB by default.
-* * Command to find block size : `hdfs getconf -confKey dfs.blocksize`
+  * Command to find block size : `hdfs getconf -confKey dfs.blocksize`
 
 * Consider repartitioning carefully, depending on your data organization, it may or may not cause shuffle. The shuffle can happen at the begining of stage (is called Shuffle Read) and that can happen at the end of stage (is called Shuffle Write).
 
 * The actual allocated memory by YARN for an executor = --executor-memory + spark.yarn.executor.memoryOverhead. The memoryOverhead is calculated as 7% of executor memory that you want to allocate. If you request 10GB, yarn will allocate total 10+0.7 = ~11GB
-* * The calculation for that overhead is MAX(384, .07 * spark.executor.memory). If 7% of requsted is greater than 384MB, the greater overhead is used.
-* * Without proper memory allocation, you will see errors like `Container killed by YARN for exceeding memory limits. 9.0 GB of 9 GB physical memory used`
+  * The calculation for that overhead is MAX(384, .07 * spark.executor.memory). If 7% of requsted is greater than 384MB, the greater overhead is used.
+  * Without proper memory allocation, you will see errors like `Container killed by YARN for exceeding memory limits. 9.0 GB of 9 GB physical memory used`
 * Keep the number of cores per executor to  <=5 because more than 5 cores per executor may degrade HDFS I/O throughput.
 * Keep aside few resources for Yarn processes
-* * reserve one executor and 5 cores on each node other resources
-* * reserve 1-2gb per node for additional overhead
-* * remember driver is also an executor
+  * reserve one executor and 5 cores on each node other resources
+  * reserve 1-2gb per node for additional overhead
+  * remember driver is also an executor
 
 ### Understanding overall capacity:
 
