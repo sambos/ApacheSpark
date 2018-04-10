@@ -43,4 +43,20 @@ or using
 * The actual allocated memory by YARN for an executor = --executor-memory + spark.yarn.executor.memoryOverhead. The memoryOverhead is calculated as 7% of executor memory that you want to allocate. If you request 10GB, yarn will allocate total 10+0.7 = ~11GB
 * * The calculation for that overhead is MAX(384, .07 * spark.executor.memory). If 7% of requsted is greater than 384MB, the greater overhead is used.
 * * Without proper memory allocation, you will see errors like `Container killed by YARN for exceeding memory limits. 9.0 GB of 9 GB physical memory used`
+* Keep the number of cores per executor to  <=5 because more than 5 cores per executor may degrade HDFS I/O throughput.
+* Keep aside few resources for Yarn processes
+* * reserve one executor and 5 cores on each node other resources
+* * reserve 1-2gb per node for additional overhead
+* * remember driver is also an executor
+
+### Understanding overall capacity:
+
+|Type|Estimate|
+|------------|-------------------|
+|Cache Memory |	spark.executor.memory * spark.storage.memoryFraction|
+|Container Memory	| spark.executor.memory + spark.yarn.executor.memoryOverhead|
+|Heap Memory	| Container Memory - Cache Memory|
+|Used Memory	| num-executors * Container Memory|
+|Remaining Memory	| yarn.nodemanager.resource.memory-mb - Used Memory|
+
 
