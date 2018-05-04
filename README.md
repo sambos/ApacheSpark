@@ -17,6 +17,7 @@ Beware, Spark has a lot more performance tuning parameters and requires a good k
 * Recommended resources :
   * http://people.csail.mit.edu/matei/papers/2012/nsdi_spark.pdf
   * http://site.clairvoyantsoft.com/understanding-resource-allocation-configurations-spark-application/
+  * [Understanding paritions](https://medium.com/parrot-prediction/partitioning-in-apache-spark-8134ad840b0)
 
 
 ## Things to Keep in Mind
