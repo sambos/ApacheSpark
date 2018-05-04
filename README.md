@@ -27,7 +27,7 @@ Having too many small files on HDFS is not good for performance. First of all. E
 * By default Spark starts on YARN with 2 executors (--num-executors) with 1 thread each (--executor-cores) and 512m of RAM (--executor-cores), giving you only 2 threads with 512MB RAM each, which is really small for the real-world tasks.
 * You can change this settings with --num-executors 4 --executor-memory 12g --executor-cores 4 which would give you more parallelism - 16 threads in this particular case, which means 16 tasks running in parallel. You can also check default parallelism from sc SparkConfig.
 * For fast reading and writing use SequenceFile (that uses binary compressed format)
-
+* A single partition typically shouldn’t contain more than 128MB and a single shuffle block cannot be larger than 2GB (see SPARK-6235). you will see an error like `Size exceeds integer: MAX_VALUE` - you can try to repartition data for a larger # partitions.
 * Spark shuffles data when using joins or aggregations, you can override the shuffle partitions that spark uses by setting spark.sql.shuffle.partitions (default is 200) see [Spark SQL Programming Guide](http://spark.apache.org/docs/latest/sql-programming-guide.html#other-configuration-options)
 
 ```
