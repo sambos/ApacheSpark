@@ -1,6 +1,10 @@
 # ApacheSpark
 Apache Spark is designed for interactive batch processing and somewhat near realtime streaming (micro batch) processing. It will still be in the market and is well fit for batch processing. For real time streaming i would recommend to look at Apache Flink project.
 
+## Setup spark cluster in Docker
+* https://github.com/mvillarrealb/docker-spark-cluster
+* Or use files provided in here..
+
 ## Sharing state across Spark Jobs
 Global variable in spark   
 Broadcast variables   
